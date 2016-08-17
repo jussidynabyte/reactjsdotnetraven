@@ -33,7 +33,14 @@ namespace ReactDemo.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(_comments);
+        }
+
+        [HttpPost]
+        public ActionResult AddComment(CommentModel comment)
+        {
+            _comments.Add(comment);
+            return Content("Success :)");
         }
 
         [OutputCache(Location = OutputCacheLocation.None)]

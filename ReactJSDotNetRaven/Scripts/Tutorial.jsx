@@ -5,12 +5,43 @@
 ];
 
 var CommentBox = React.createClass({
+  loadCommentsFromServer: function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', this.props.url, true);
+    xhr.onload = function() {
+      var data = JSON.parse(xhr.responseText);
+      this.setState({ data: data });
+    }.bind(this);
+    xhr.send();
+  },
+  handleCommentSubmit: function(comment) {
+    var comments = this.state.data;
+    var newComments = comments.concat([comment]);
+    this.setState({data: newComments});
+
+    var data = new FormData();
+    data.append('Author', comment.Author);
+    data.append('Text', comment.Text);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', this.props.submitUrl, true);
+    xhr.onload = function() {
+      this.loadCommentsFromServer();
+    }.bind(this);
+    xhr.send(data);
+  },
+  getInitialState: function() {
+    return { data: this.props.initialData };
+  },
+  componentDidMount: function() {
+    window.setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+  },
   render: function() {
     return (
       <div className="commentBox">
         <h1>Comments</h1>
-        <CommentList data={this.props.data} />
-        <CommentForm />
+        <CommentList data={this.state.data} />
+        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
     );
   }
@@ -20,7 +51,7 @@ var CommentList = React.createClass({
   render: function() {
     var commentNodes = this.props.data.map(function (comment) {
       return (
-        <Comment author={comment.Author}>{comment.Text}
+        <Comment key={comment.Author} author={comment.Author}>{comment.Text}
         </Comment>
       );
     });
@@ -32,13 +63,27 @@ var CommentList = React.createClass({
 });
 
 var CommentForm = React.createClass({
-    render: function() {
-        return (
-          <div className="commentForm">
-            Hello, world! I am a CommentForm.
-          </div>
-      );
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var author = this.refs.author.value.trim();
+    var text = this.refs.text.value.trim();
+    if (!text || !author) {
+      return;
     }
+    this.props.onCommentSubmit({Author: author, Text: text});
+    this.refs.author.value = '';
+    this.refs.text.value = '';
+    return;
+  },
+  render: function() {
+    return (
+      <form className="commentForm" onSubmit={this.handleSubmit}>
+        <input type="text" placeholder="Your name" ref="author" />
+        <input type="text" placeholder="Say something..." ref="text" />
+        <input type="submit" value="Post" />
+      </form>
+    );
+  }
 });
 
 var Comment = React.createClass({
@@ -54,8 +99,3 @@ var Comment = React.createClass({
     );
   }
 });
-
-ReactDOM.render(
-  <CommentBox data={data} />,
-  document.getElementById('content')
-);

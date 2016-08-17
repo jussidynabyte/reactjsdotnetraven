@@ -87,3 +87,5 @@ C:\Users\cahrs\Documents\visual studio 2015\Projects\reactjsdotnetraven\ReactJSD
 C:\Users\cahrs\Documents\visual studio 2015\Projects\reactjsdotnetraven\ReactJSDotNetRaven\obj\Debug\ReactJSDotNetRaven.csprojResolveAssemblyReference.cache
 C:\Users\cahrs\Documents\visual studio 2015\Projects\reactjsdotnetraven\ReactJSDotNetRaven\obj\Debug\ReactJSDotNetRaven.dll
 C:\Users\cahrs\Documents\visual studio 2015\Projects\reactjsdotnetraven\ReactJSDotNetRaven\obj\Debug\ReactJSDotNetRaven.pdb
+C:\Users\cahrs\Documents\visual studio 2015\Projects\reactjsdotnetraven\ReactJSDotNetRaven\bin\System.Web.Optimization.React.dll
+C:\Users\cahrs\Documents\visual studio 2015\Projects\reactjsdotnetraven\ReactJSDotNetRaven\bin\System.Web.Optimization.React.xml

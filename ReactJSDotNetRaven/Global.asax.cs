@@ -3,6 +3,7 @@ using ReactJSDotNetRaven.App_Start;
 using System;
 using System.Diagnostics;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace ReactJSDotNetRaven
@@ -12,6 +13,7 @@ namespace ReactJSDotNetRaven
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             FilterConfig.Configure(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
