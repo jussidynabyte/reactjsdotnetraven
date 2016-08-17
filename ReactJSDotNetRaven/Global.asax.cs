@@ -1,4 +1,5 @@
-﻿using ReactJSDotNetRaven.App_Start;
+﻿using ReactDemo;
+using ReactJSDotNetRaven.App_Start;
 using System;
 using System.Diagnostics;
 using System.Web.Mvc;
@@ -12,7 +13,7 @@ namespace ReactJSDotNetRaven
         protected void Application_Start(object sender, EventArgs e)
         {
             FilterConfig.Configure(GlobalFilters.Filters);
-            RouteConfig.Configure(RouteTable.Routes);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 
         protected void Session_Start(object sender, EventArgs e)
