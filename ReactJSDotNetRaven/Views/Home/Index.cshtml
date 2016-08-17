@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ReactDemo.Models.CommentModel>
+﻿@model IEnumerable<ReactJSDotNetRaven.Models.CommentModel>
 @{
     Layout = null;
 }
@@ -7,7 +7,7 @@
     <title>Hello React</title>
 </head>
 <body>
-    @Html.React("CommentBox", new
+@Html.React("CommentBox", new
 {
     initialData = Model,
     url = Url.Action("Comments"),
